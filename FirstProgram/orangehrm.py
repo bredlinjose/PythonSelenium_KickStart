@@ -13,6 +13,7 @@ driver.find_element(By.NAME, 'password').send_keys('admin123')
 driver.find_element(By.XPATH, "//button[@type='submit']").click()
 
 text = driver.find_element(By.XPATH, "//h6").text
+
 if text.__contains__('Dashboard'):
     print('Test Case Passed')
 else:
