@@ -32,7 +32,7 @@ mobileNumberTb = driver.find_element(By.XPATH, "//div[@class='element-companyId'
 mobileNumberTb.send_keys('8526003286')
 submitBtn = driver.find_element(By.XPATH, "//button[text()='Submit']")
 
-firstCrushTb = driver.find_element(By.XPATH, "//input[@placeholder='First Crush']")
+firstCrushTb = driver.find_element(By.XPATH, "//input[@ placeholder='First Crush']")
 firstCrushTb.send_keys('No Crush')
 
 inspectElementTxt = driver.find_element(By.XPATH, "//div[@data-widget_type='html.default']/div/span[text()]")
@@ -91,4 +91,15 @@ driver.switch_to.window(parentHandle)
 
 emailTb.clear()
 emailTb.send_keys('bredlinjose@gmail.com')
+
+usernameCb = driver.find_element(By.XPATH, "//a[.='Jordan.Mathews']/../../td/input")
+usernameCb.click()
+
+usernameCb1 = driver.find_element(By.XPATH, "//a[.='Joe.Root']/../../td/input")
+usernameCb1.click()
+
+userRoleTxt = driver.find_element(By.XPATH, "//a[.='John.Smith']/../following-sibling::td")
+role = userRoleTxt.text
+print('Role:', role)
+
 
