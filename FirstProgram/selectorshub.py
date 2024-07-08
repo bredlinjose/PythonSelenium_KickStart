@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from selenium.common import ElementNotInteractableException
 from selenium.webdriver import ActionChains
@@ -7,6 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
 options = webdriver.ChromeOptions()
+options.add_experimental_option("prefs", {"download.default_directory": "/files"})
 options.add_experimental_option('detach', True)
 
 driver = webdriver.Chrome(options)
@@ -22,13 +25,14 @@ practicePageLnk.click()
 wait.until(expected_conditions.url_contains('xpath-practice-page'))
 pageTitle = driver.title
 
-emailTb = driver.find_element(By.XPATH,"//input[@title='Email']")
+emailTb = driver.find_element(By.XPATH, "//input[@title='Email']")
 emailTb.send_keys('bredlinjose@yahoo.com')
 passwordTb = driver.find_element(By.CSS_SELECTOR, 'input[title=Password]')
 passwordTb.send_keys('bred123')
 companyTb = driver.find_element(By.XPATH, "//div[@class='element-companyId']/descendant::input[@name='company']")
 companyTb.send_keys('UTH UK')
-mobileNumberTb = driver.find_element(By.XPATH, "//div[@class='element-companyId']/descendant::input[@name='mobile number']")
+mobileNumberTb = driver.find_element(By.XPATH,
+                                     "//div[@class='element-companyId']/descendant::input[@name='mobile number']")
 mobileNumberTb.send_keys('8526003286')
 submitBtn = driver.find_element(By.XPATH, "//button[text()='Submit']")
 
@@ -102,4 +106,107 @@ userRoleTxt = driver.find_element(By.XPATH, "//a[.='John.Smith']/../following-si
 role = userRoleTxt.text
 print('Role:', role)
 
+# # cross origin iframe
+# driver.get("https://selectorshub.com/cross-origin-iframe/")
+# iframe = driver.find_element(By.XPATH, "//p/iframe[@loading='lazy' and contains(@src,'docs.google.com')]")
+# driver.switch_to.frame(iframe)
+#
+# yesCb = driver.find_element(By.XPATH, "//span[@dir='auto' and .='Yes']")
+# yesCb.click()
+#
+# driver.switch_to.parent_frame()
+#
+# shopFrame = driver.find_element(By.XPATH, "//iframe[@id='shop_frame']")
+# driver.switch_to.frame(shopFrame)
+# time.sleep(5)  # scroll manually
+#
+# # we can use only CSS_SELECTOR to interact with the element inside the shadow root
+# shadow_host1 = driver.find_element(By.CSS_SELECTOR, "shop-app[page='home']").shadow_root
+# shadow_host1.find_element(By.CSS_SELECTOR, "a[href='/list/ladies_outerwear']").click()
+#
+# shadow_host2 = shadow_host1.find_element(By.CSS_SELECTOR, "paper-icon-button[icon='shopping-cart']").shadow_root
+# shadow_host2.find_element(By.CSS_SELECTOR, "#icon").click()
+#
+# driver.get("https://selectorshub.com/xpath-practice-page/")
 
+frameScenariosLnk = driver.find_element(By.XPATH,
+                                        "//h3/a[text()='Click here to practice iframe and nested iframe scenarios.']")
+act.move_to_element(frameScenariosLnk).perform()
+frameScenariosLnk.click()
+
+driver.switch_to.window(driver.window_handles[1])
+time.sleep(5)
+
+# nested iframe
+iframe1 = driver.find_element(By.XPATH, "//iframe[@id='pact1']")
+driver.switch_to.frame(iframe1)
+firstCrushTb = driver.find_element(By.XPATH, "//input[@id='inp_val']")
+firstCrushTb.send_keys("User Unknown")
+lostBtn = driver.find_element(By.ID, "lost")
+lostBtn.click()
+
+iframe2 = driver.find_element(By.XPATH, "//iframe[@id='pact2']")
+driver.switch_to.frame(iframe2)
+currentCrushTb = driver.find_element(By.ID, "jex")
+currentCrushTb.send_keys("No Crush")
+connectNowBtn = driver.find_element(By.ID, "connect")
+connectNowBtn.click()
+
+iframe3 = driver.find_element(By.XPATH, "//iframe[@id='pact3']")
+driver.switch_to.frame(iframe3)
+destinyTb = driver.find_element(By.ID, "glaf")
+destinyTb.send_keys("Unknown Place")
+closeBtn = driver.find_element(By.CSS_SELECTOR, "#close")
+closeBtn.click()
+
+driver.switch_to.parent_frame()
+driver.close()
+driver.switch_to.window(parentHandle)
+
+# iframe inside the shadow dom
+# shadowRoot = driver.find_element(By.CSS_SELECTOR, "#userName").shadow_root
+# shadowDomLnk = shadowRoot.find_element(By.CSS_SELECTOR, "a[href='https://selectorshub.com/iframe-in-shadow-dom/']")
+# shadowDomLnk.click()
+
+driver.get("https://selectorshub.com/iframe-in-shadow-dom/")
+time.sleep(5)
+act.scroll_by_amount(100, 100).perform()
+shadow1 = driver.find_element(By.CSS_SELECTOR, "#userName").shadow_root
+insideFrame = shadow1.find_element(By.CSS_SELECTOR, "#pact1")
+driver.switch_to.frame(insideFrame)
+destinyTb1 = driver.find_element(By.CSS_SELECTOR, "#glaf")
+destinyTb1.send_keys("Heaven")
+
+driver.back()
+
+downloadLnk = driver.find_element(By.PARTIAL_LINK_TEXT, "Click to Download PNG File")
+act.move_to_element(userRoleTxt).perform()
+downloadLnk.click()
+
+chooseFileBtn = driver.find_element(By.ID, "myFile")
+chooseFileBtn.send_keys("/files/dummy.png")
+time.sleep(3)
+
+openWindowAlertBtn = driver.find_element(By.XPATH, "//button[text()='Click To Open Window Alert']")
+openWindowAlertBtn.click()
+
+alert = driver.switch_to.alert
+print(alert.text)
+alert.accept()
+
+openWindowPromptAlertBtn = driver.find_element(By.XPATH, "//button[text()='Click To Open Window Prompt Alert']")
+openWindowPromptAlertBtn.click()
+alert = driver.switch_to.alert
+print(alert.text)
+alert.send_keys("Hiii")
+alert.accept()
+
+openModalBtn = driver.find_element(By.ID, "myBtn")
+openModalBtn.click()
+
+modelHeaderTxt = driver.find_element(By.XPATH, "//div[@class='modal-header']/h2/a")
+wait.until(expected_conditions.visibility_of(modelHeaderTxt))
+print(modelHeaderTxt.text)
+closeBtn = driver.find_element(By.XPATH, "//span[@class='close']")
+closeBtn.click()
+wait.until(expected_conditions.invisibility_of_element(closeBtn))
