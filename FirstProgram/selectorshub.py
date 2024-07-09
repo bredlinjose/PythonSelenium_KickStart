@@ -1,3 +1,4 @@
+import os
 import time
 
 from selenium import webdriver
@@ -8,8 +9,10 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+downloadPath = "C:\\Users\\Lenovo\\PycharmProjects\\PythonSelenium_KickStart\\files"
+uploadPath = "C:\\Users\\Lenovo\\PycharmProjects\\PythonSelenium_KickStart\\files\\dummy.png"
 options = webdriver.ChromeOptions()
-options.add_experimental_option("prefs", {"download.default_directory": "/files"})
+options.add_experimental_option("prefs", {"download.default_directory": downloadPath})
 options.add_experimental_option('detach', True)
 
 driver = webdriver.Chrome(options)
@@ -48,7 +51,8 @@ firstNameTb = driver.find_element(By.XPATH, "//input[@class='nameFld' and @place
 act = ActionChains(driver)
 
 if not firstNameTb.is_enabled():
-    act.move_to_element(enterNameHereTxt).perform()
+    # act.move_to_element(enterNameHereTxt).perform()
+    act.scroll_by_amount(100, -250).perform()
     enterNameHereTxt.click()
     wait.until(expected_conditions.element_to_be_clickable(firstNameTb))
     firstNameTb.send_keys('Bredlin')
@@ -63,7 +67,7 @@ try:
     else:
         lastNameTb.send_keys('Jose')
 except ElementNotInteractableException:
-    print('Last Name Element is not Interactable')
+    print('Last Name textbox is disabled')
 
 pickDateTb = driver.find_element(By.ID, 'datepicker')
 attributeValue = pickDateTb.get_attribute('value')
@@ -96,6 +100,9 @@ driver.switch_to.window(parentHandle)
 emailTb.clear()
 emailTb.send_keys('bredlinjose@gmail.com')
 
+# canvas
+canvas = driver.find_element(By.XPATH, "//canvas[@id='canpro']")
+
 usernameCb = driver.find_element(By.XPATH, "//a[.='Jordan.Mathews']/../../td/input")
 usernameCb.click()
 
@@ -106,28 +113,29 @@ userRoleTxt = driver.find_element(By.XPATH, "//a[.='John.Smith']/../following-si
 role = userRoleTxt.text
 print('Role:', role)
 
-# # cross origin iframe
-# driver.get("https://selectorshub.com/cross-origin-iframe/")
-# iframe = driver.find_element(By.XPATH, "//p/iframe[@loading='lazy' and contains(@src,'docs.google.com')]")
-# driver.switch_to.frame(iframe)
-#
-# yesCb = driver.find_element(By.XPATH, "//span[@dir='auto' and .='Yes']")
-# yesCb.click()
-#
-# driver.switch_to.parent_frame()
-#
-# shopFrame = driver.find_element(By.XPATH, "//iframe[@id='shop_frame']")
-# driver.switch_to.frame(shopFrame)
+# cross origin iframe
+driver.get("https://selectorshub.com/cross-origin-iframe/")
+iframe = driver.find_element(By.XPATH, "//p/iframe[@loading='lazy' and contains(@src,'docs.google.com')]")
+driver.switch_to.frame(iframe)
+
+yesCb = driver.find_element(By.XPATH, "//span[@dir='auto' and .='Yes']")
+yesCb.click()
+
+driver.switch_to.parent_frame()
+
+shopFrame = driver.find_element(By.XPATH, "//iframe[@id='shop_frame']")
+driver.switch_to.frame(shopFrame)
 # time.sleep(5)  # scroll manually
-#
-# # we can use only CSS_SELECTOR to interact with the element inside the shadow root
-# shadow_host1 = driver.find_element(By.CSS_SELECTOR, "shop-app[page='home']").shadow_root
-# shadow_host1.find_element(By.CSS_SELECTOR, "a[href='/list/ladies_outerwear']").click()
-#
-# shadow_host2 = shadow_host1.find_element(By.CSS_SELECTOR, "paper-icon-button[icon='shopping-cart']").shadow_root
-# shadow_host2.find_element(By.CSS_SELECTOR, "#icon").click()
-#
-# driver.get("https://selectorshub.com/xpath-practice-page/")
+act.scroll_by_amount(100, 400).perform()
+
+# we can use only CSS_SELECTOR to interact with the element inside the shadow root
+shadow_host1 = driver.find_element(By.CSS_SELECTOR, "shop-app[page='home']").shadow_root
+shadow_host1.find_element(By.CSS_SELECTOR, "a[href='/list/ladies_outerwear']").click()
+
+shadow_host2 = shadow_host1.find_element(By.CSS_SELECTOR, "paper-icon-button[icon='shopping-cart']").shadow_root
+shadow_host2.find_element(By.CSS_SELECTOR, "#icon").click()
+
+driver.get("https://selectorshub.com/xpath-practice-page/")
 
 frameScenariosLnk = driver.find_element(By.XPATH,
                                         "//h3/a[text()='Click here to practice iframe and nested iframe scenarios.']")
@@ -169,7 +177,6 @@ driver.switch_to.window(parentHandle)
 # shadowDomLnk.click()
 
 driver.get("https://selectorshub.com/iframe-in-shadow-dom/")
-time.sleep(5)
 act.scroll_by_amount(100, 100).perform()
 shadow1 = driver.find_element(By.CSS_SELECTOR, "#userName").shadow_root
 insideFrame = shadow1.find_element(By.CSS_SELECTOR, "#pact1")
@@ -180,11 +187,12 @@ destinyTb1.send_keys("Heaven")
 driver.back()
 
 downloadLnk = driver.find_element(By.PARTIAL_LINK_TEXT, "Click to Download PNG File")
-act.move_to_element(userRoleTxt).perform()
+act.scroll_by_amount(300, -200).perform()
 downloadLnk.click()
 
 chooseFileBtn = driver.find_element(By.ID, "myFile")
-chooseFileBtn.send_keys("/files/dummy.png")
+chooseFileBtn.send_keys(uploadPath)
+
 time.sleep(3)
 
 openWindowAlertBtn = driver.find_element(By.XPATH, "//button[text()='Click To Open Window Alert']")
