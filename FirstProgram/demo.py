@@ -12,3 +12,10 @@ loc = Path(__file__).parent.parent.joinpath("file\\dummy.png")
 print(loc)
 
 print(pathlib.Path().absolute())
+
+abc = '123'
+num = int(abc)
+print(num, type(num))
+
+boo = 'September' < 'January'
+print(boo)
