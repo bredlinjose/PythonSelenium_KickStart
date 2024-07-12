@@ -7,6 +7,7 @@ options = webdriver.ChromeOptions()
 options.add_experimental_option('detach', True)
 
 driver = webdriver.Chrome(options)
+
 driver.maximize_window()
 driver.implicitly_wait(10)
 driver.get("https://jqueryui.com/datepicker/")
@@ -39,9 +40,6 @@ while not (mon == month and int(yr) == year):
     # nextIcn.click()
     mon = driver.find_element(By.XPATH, "//span[@class='ui-datepicker-month']").text
     yr = driver.find_element(By.XPATH, "//span[@class='ui-datepicker-year']").text
-
-
-
 
 dateTxt = driver.find_elements(By.XPATH, "//table[@class='ui-datepicker-calendar']/descendant::a")
 for ele in dateTxt:
