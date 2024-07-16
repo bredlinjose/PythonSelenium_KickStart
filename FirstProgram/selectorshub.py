@@ -9,8 +9,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-downloadPath = "C:\\Users\\Lenovo\\PycharmProjects\\PythonSelenium_KickStart\\files"
-uploadPath = "C:\\Users\\Lenovo\\PycharmProjects\\PythonSelenium_KickStart\\files\\dummy.png"
+uploadPath = os.path.dirname(os.path.abspath('.')) + '\\files\\dummy.png'
+downloadPath = os.path.dirname(os.path.abspath('.')) + '\\files'
 options = webdriver.ChromeOptions()
 options.add_experimental_option("prefs", {"download.default_directory": downloadPath})
 options.add_experimental_option('detach', True)
@@ -216,5 +216,8 @@ modelHeaderTxt = driver.find_element(By.XPATH, "//div[@class='modal-header']/h2/
 wait.until(expected_conditions.visibility_of(modelHeaderTxt))
 print(modelHeaderTxt.text)
 closeBtn = driver.find_element(By.XPATH, "//span[@class='close']")
+act.move_to_element(closeBtn).perform()
 closeBtn.click()
 wait.until(expected_conditions.invisibility_of_element(closeBtn))
+
+driver.close()
