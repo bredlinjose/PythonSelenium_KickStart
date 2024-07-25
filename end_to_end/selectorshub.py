@@ -9,8 +9,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
-uploadPath = os.path.dirname(os.path.abspath('.')) + '\\files\\dummy.png'
-downloadPath = os.path.dirname(os.path.abspath('.')) + '\\files'
+uploadPath = os.path.dirname(os.path.abspath('../basic')) + '\\files\\dummy.png'
+downloadPath = os.path.dirname(os.path.abspath('../basic')) + '\\files\\download'
 options = webdriver.ChromeOptions()
 options.add_experimental_option("prefs", {"download.default_directory": downloadPath})
 options.add_experimental_option('detach', True)

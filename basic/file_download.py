@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-location = os.getcwd()
+location = os.path.dirname(os.path.abspath('.')) + '\\files\\download'
 print(location)
 def browser_setup(browser):
     global driver
@@ -36,7 +36,7 @@ def browser_teardown():
     driver.quit()
 
 
-driver = browser_setup("edge")
+driver = browser_setup("chrome")
 driver.implicitly_wait(10)
 driver.maximize_window()
 driver.get("https://file-examples.com/index.php/sample-documents-download/")

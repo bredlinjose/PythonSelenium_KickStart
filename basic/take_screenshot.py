@@ -11,8 +11,8 @@ driver.maximize_window()
 
 driver.get("https://demo.nopcommerce.com/")
 
-driver.get_screenshot_as_file(os.getcwd() + "\\screenshot1.png")
-driver.save_screenshot(os.getcwd() + "\\screenshot.png")
+driver.get_screenshot_as_file(os.path.dirname(os.path.abspath('.')) + '\\files\\screenshot' + "\\screenshot1.png")
+driver.save_screenshot(os.path.dirname(os.path.abspath('.')) + '\\files\\screenshot' + "\\screenshot.png")
 
 # driver.get_screenshot_as_png()  # driver.get_screenshot_as_base64()  # saves in binary format
 

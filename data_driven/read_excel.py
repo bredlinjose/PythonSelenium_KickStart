@@ -3,10 +3,10 @@ import os
 import openpyxl
 
 # file --> workbook --> sheets --> rows --> cells
-
-file = os.getcwd() + "\\test_data.xlsx"
+file = os.path.dirname(os.path.abspath('.')) + '\\files' + "\\test_data.xlsx"
 workbook = openpyxl.open(file)
 sheet = workbook["books"]
+# sheet = workbook.active  # get active sheet from Excel  #used only for single sheet
 
 rows = sheet.max_row
 print("row count:", rows)
