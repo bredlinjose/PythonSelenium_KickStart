@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="5" time="0.226" timestamp="2024-07-26T13:05:25.874313+05:30" hostname="DESKTOP-GA5D9PH"><testcase classname="pytest_practice.test_sample" name="test_sample_one" time="0.005"><failure message="AssertionError: 5 is not greater than 10&#10;assert 5 &gt; 10">def test_sample_one():
+        print("Inside sample one")
+        a = 5
+        b = 10
+&gt;       assert a &gt; b, str(a) + " is not greater than " + str(b)
+E       AssertionError: 5 is not greater than 10
+E       assert 5 &gt; 10
+
+pytest_practice\test_sample.py:6: AssertionError</failure></testcase><testcase classname="pytest_practice.test_sample" name="test_sample_two" time="0.001" /><testcase classname="pytest_practice.test_sample" name="test_sample_three" time="0.001"><failure message="AssertionError: Bredlin is not equal to Bredline&#10;assert False&#10; +  where False = &lt;method-wrapper '__eq__' of str object at 0x0000025210D0C150&gt;('Bredline')&#10; +    where &lt;method-wrapper '__eq__' of str object at 0x0000025210D0C150&gt; = 'Bredlin'.__eq__">def test_sample_three():
+        print("Inside sample three")
+        a = 'Bredlin'
+        b = 'Bredline'
+&gt;       assert a.__eq__(b), a + " is not equal to " + b
+E       AssertionError: Bredlin is not equal to Bredline
+E       assert False
+E        +  where False = &lt;method-wrapper '__eq__' of str object at 0x0000025210D0C150&gt;('Bredline')
+E        +    where &lt;method-wrapper '__eq__' of str object at 0x0000025210D0C150&gt; = 'Bredlin'.__eq__
+
+pytest_practice\test_sample.py:19: AssertionError</failure></testcase><testcase classname="pytest_practice.test_sample1" name="test_sample_four" time="0.001" /><testcase classname="pytest_practice.test_sample1" name="test_sample_five" time="0.001" /></testsuite></testsuites>
