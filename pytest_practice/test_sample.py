@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.mark.smoke
+@pytest.mark.xfail
 def test_sample_one():
     print("Inside sample one")
     a = 5
@@ -15,7 +15,7 @@ def test_sample_two():
     b = 10
     assert a == b, str(a) + " is equal " + str(b)
 
-@pytest.mark.smoke
+@pytest.mark.skip
 def test_sample_three():
     print("Inside sample three")
     a = 'Bredlin'

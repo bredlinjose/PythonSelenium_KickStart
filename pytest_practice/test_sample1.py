@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.mark.regression
+@pytest.mark.xfail
 def test_sample_four():
     print("Inside sample four")
 
