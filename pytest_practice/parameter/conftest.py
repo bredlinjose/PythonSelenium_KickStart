@@ -3,10 +3,15 @@ import pytest
 from allure_commons.types import AttachmentType
 from selenium import webdriver
 
-@pytest.fixture()
+@pytest.fixture(params=["chrome", "edge", "firefox"])
 def setup_and_teardown(request):
     global driver
-    driver = webdriver.Chrome()
+    if request.param == "chrome":
+        driver = webdriver.Chrome()
+    elif request.param == "edge":
+        driver = webdriver.Edge()
+    elif request.param == "firefox":
+        driver = webdriver.Firefox()
     driver.maximize_window()
     driver.implicitly_wait(10)
     driver.get("https://tutorialsninja.com/demo/")

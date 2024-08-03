@@ -3,10 +3,17 @@ import pytest
 from allure_commons.types import AttachmentType
 from selenium import webdriver
 
+def pytest_addoption(parser):
+    parser.addoption("--browser")
+
 @pytest.fixture()
 def setup_and_teardown(request):
     global driver
-    driver = webdriver.Chrome()
+    browser = request.config.getoption("--browser")
+    if browser == "chrome":
+        driver = webdriver.Chrome()
+    elif browser == "edge":
+        driver = webdriver.Firefox()
     driver.maximize_window()
     driver.implicitly_wait(10)
     driver.get("https://tutorialsninja.com/demo/")
@@ -14,6 +21,7 @@ def setup_and_teardown(request):
     yield
     driver.quit()
 
+#  pytest -rA --browser chrome
 
 @pytest.fixture()
 def screenshot_on_failure(request):
