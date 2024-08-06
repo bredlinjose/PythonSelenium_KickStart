@@ -25,7 +25,7 @@ wait.until(expected_conditions.url_contains('https://selectorshub.com/'))
 practicePageLnk = driver.find_element(By.XPATH, "//a[text()='PracticePage']")
 practicePageLnk.click()
 
-wait.until(expected_conditions.url_contains('xpath-practice-page'))
+wait.until(expected_conditions.url_contains('xpath-practice-page_object_model'))
 pageTitle = driver.title
 
 emailTb = driver.find_element(By.XPATH, "//input[@title='Email']")
@@ -129,7 +129,7 @@ driver.switch_to.frame(shopFrame)
 act.scroll_by_amount(100, 400).perform()
 
 # we can use only CSS_SELECTOR to interact with the element inside the shadow root
-shadow_host1 = driver.find_element(By.CSS_SELECTOR, "shop-app[page='home']").shadow_root
+shadow_host1 = driver.find_element(By.CSS_SELECTOR, "shop-app[page_object_model='home']").shadow_root
 shadow_host1.find_element(By.CSS_SELECTOR, "a[href='/list/ladies_outerwear']").click()
 
 shadow_host2 = shadow_host1.find_element(By.CSS_SELECTOR, "paper-icon-button[icon='shopping-cart']").shadow_root
