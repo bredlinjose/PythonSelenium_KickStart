@@ -4,6 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 from page_object_model.generic_utils.web_utils import WebUtils
+from page_object_model.pages.login_page import LoginPage
+from page_object_model.pages.register_page import RegisterPage
+from page_object_model.pages.search_page import SearchPage
+
 
 class HomePage:
 
@@ -12,7 +16,7 @@ class HomePage:
 
     search_tb = (By.NAME, "search")
     search_icn = (By.XPATH, "//button[contains(@class, 'btn-default')]")
-    myaccount_dd = (By.LINK_TEXT, "My Account")
+    myAccount_dd = (By.LINK_TEXT, "My Account")
     register_opt = (By.XPATH, "//li/a[text()='Register']")
     login_opt = (By.XPATH, "//li/a[text()='Login']")
 
@@ -29,4 +33,15 @@ class HomePage:
 
     def click_on_search_icon(self):
         self.driver.find_element(*self.search_icn).click()
-        time.sleep(10)
+        return SearchPage(self.driver)
+
+    def click_on_my_account_dropdown(self):
+        self.driver.find_element(*self.myAccount_dd).click()
+
+    def click_on_register_option(self):
+        self.driver.find_element(*self.register_opt).click()
+        return RegisterPage(self.driver)
+
+    def click_on_login_option(self):
+        self.driver.find_element(*self.login_opt).click()
+        return LoginPage(self.driver)
