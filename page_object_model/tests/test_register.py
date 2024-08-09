@@ -11,8 +11,12 @@ from page_object_model.pages.home_page import HomePage
 class TestRegister:
     def test_register_with_valid_data(self):
         home_page = HomePage(self.driver)
-        home_page.click_on_my_account_dropdown()
-        register_page = home_page.click_on_register_option()
+
+        # home_page.click_on_my_account_dropdown()
+        # register_page = home_page.click_on_register_option()
+
+        register_page = home_page.navigate_to_register_page()
+
         register_page.set_value_on_firstname_textfield(common_utils.random_string(5))
         register_page.set_value_on_lastname_textfield(common_utils.random_string(4))
         register_page.set_value_on_email_textfield(common_utils.random_email("@yahoo.com"))

@@ -35,6 +35,10 @@ class HomePage:
         self.driver.find_element(*self.search_icn).click()
         return SearchPage(self.driver)
 
+    def search_product(self, value):
+        self.set_value_on_search_textfield(value)
+        return self.click_on_search_icon()
+
     def click_on_my_account_dropdown(self):
         self.driver.find_element(*self.myAccount_dd).click()
 
@@ -45,3 +49,11 @@ class HomePage:
     def click_on_login_option(self):
         self.driver.find_element(*self.login_opt).click()
         return LoginPage(self.driver)
+
+    def navigate_to_register_page(self):
+        self.click_on_my_account_dropdown()
+        return self.click_on_register_option()
+
+    def navigate_to_login_page(self):
+        self.click_on_my_account_dropdown()
+        return self.click_on_login_option()

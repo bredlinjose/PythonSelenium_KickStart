@@ -14,9 +14,3 @@ def random_email(domain):
     letters = random_string(5)
     numbers = str(random_number(3))
     return letters + numbers + domain
-
-
-print(random_string(5))
-print(random_number(5))
-print(random_email("@gmail.com"))
-
