@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 
@@ -10,27 +12,30 @@ from page_object_model.pages.search_page import SearchPage
 class TestSearch:
     def test_search_valid_product(self):
         home_page = HomePage(self.driver)
-
+        time.sleep(2)
         # home_page.set_value_on_search_textfield("HP")
         # search_page = home_page.click_on_search_icon()
 
         search_page = home_page.search_product("HP")
         assert search_page.display_valid_product_status()
+        time.sleep(2)
 
     def test_search_empty_product(self):
         home_page = HomePage(self.driver)
-
+        time.sleep(2)
         # home_page.set_value_on_search_textfield("")
         # search_page = home_page.click_on_search_icon()
 
         search_page = home_page.search_product("")
         assert search_page.display_invalid_product_status()
+        time.sleep(2)
 
     def test_search_invalid_product(self):
         home_page = HomePage(self.driver)
-
+        time.sleep(2)
         # home_page.set_value_on_search_textfield("Dell")
         # search_page = home_page.click_on_search_icon()
 
         search_page = home_page.search_product("Dell")
         assert search_page.display_invalid_product_status()
+        time.sleep(2)

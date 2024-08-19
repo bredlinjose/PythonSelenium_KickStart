@@ -1,3 +1,4 @@
+import datetime
 import random
 import string
 
@@ -14,3 +15,9 @@ def random_email(domain):
     letters = random_string(5)
     numbers = str(random_number(3))
     return letters + numbers + domain
+
+def get_timestamp(format):
+    return datetime.datetime.now().strftime(format)
+
+
+print(get_timestamp("%Y/%m/%d %H:%M:%S %a %p"))

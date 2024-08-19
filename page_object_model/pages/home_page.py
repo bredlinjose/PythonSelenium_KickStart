@@ -26,14 +26,14 @@ class HomePage:
     # def click_on_search_icon(self):
     #     WebUtils.click_on_element(HomePage.search_icn)
 
-    def set_value_on_search_textfield(self, value):
-        self.driver.find_element(*self.search_tb).click()
-        self.driver.find_element(*self.search_tb).clear()
-        self.driver.find_element(*self.search_tb).send_keys(value)
-
-    def click_on_search_icon(self):
-        self.driver.find_element(*self.search_icn).click()
-        return SearchPage(self.driver)
+    # def set_value_on_search_textfield(self, value):
+    #     self.driver.find_element(*self.search_tb).click()
+    #     self.driver.find_element(*self.search_tb).clear()
+    #     self.driver.find_element(*self.search_tb).send_keys(value)
+    #
+    # def click_on_search_icon(self):
+    #     self.driver.find_element(*self.search_icn).click()
+    #     return SearchPage(self.driver)
 
     def search_product(self, value):
         self.set_value_on_search_textfield(value)
